@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=500, initial-scale=1.0">
+  <title>CPA Usages</title>
+  <style>__CSS_STYLE__</style>
+</head>
+<body>
+  <div class="card" id="report">
+    <div class="header">
+      <div class="top-banner" id="top-banner"></div>
+    </div>
+
+    <main class="main-content">
+      <header class="report-heading">
+        <div class="heading-line">
+          <div class="nickname" id="report-title"></div>
+          <div class="radio-button-wrapper">
+            <span class="radio-dot"></span>
+            <span class="bot-logo" id="account-count"></span>
+          </div>
+        </div>
+        <div class="queried-at" id="queried-at"></div>
+      </header>
+
+      <section class="auth-files" id="auth-files"></section>
+      <section class="empty-state" id="empty-state" hidden>No quota-enabled Auth Files found</section>
+
+      <footer class="footer">
+        <span class="footer-title">CPA Usages Dashboard</span>
+        <span class="footer-uptime">READ ONLY</span>
+      </footer>
+    </main>
+
+    <svg class="svg-definitions" aria-hidden="true">
+      <defs>
+        <symbol id="paw-shape" viewBox="0 0 1304 1024">
+          <path d="M0 446.49054a171.094255 145.438963 90 1 0 290.877927 0 171.094255 145.438963 90 1 0-290.877927 0Z"></path>
+          <path d="M1126.923945 768.927392a140.307905 171.094255 12.07 1 0 71.553865-334.6237 140.307905 171.094255 12.07 1 0-71.553865 334.6237Z"></path>
+          <path d="M353.069892 190.999222a190.999222 149.508423 90 1 0 299.016847 0 190.999222 149.508423 90 1 0-299.016847 0Z"></path>
+          <path d="M887.858242 431.109679a149.508423 190.999222 6.71 1 0 44.634256-379.38186 149.508423 190.999222 6.71 1 0 44.634256 379.38186Z"></path>
+          <path d="M962.073434 786.025054c-10.704449 162.07067-167.201728 249.033261-352.36216 236.736415s-328.918531-118.899006-318.479481-281.058143 173.305918-264.957235 354.662289-271.415291c187.549028 37.686739 326.883801 153.577883 316.179352 315.737019z"></path>
+        </symbol>
+      </defs>
+    </svg>
+    <svg class="bg-tiny-paw" viewBox="0 0 1304 1024" aria-hidden="true"><use href="#paw-shape"></use></svg>
+    <svg class="bg-small-paw" viewBox="0 0 1304 1024" aria-hidden="true"><use href="#paw-shape"></use></svg>
+    <svg class="bg-medium-paw" viewBox="0 0 1304 1024" aria-hidden="true"><use href="#paw-shape"></use></svg>
+    <svg class="bg-big-paw" viewBox="0 0 1304 1024" aria-hidden="true"><use href="#paw-shape"></use></svg>
+  </div>
+
+  <template id="auth-file-template">
+    <article class="auth-card">
+      <header class="auth-heading">
+        <div class="provider-icon"><img data-field="provider-icon" alt=""></div>
+        <div class="provider-copy">
+          <div class="provider-type" data-field="provider-type"></div>
+          <div class="provider-detail" data-field="provider-name"></div>
+        </div>
+      </header>
+
+      <section class="subscription-meta">
+        <div class="meta-cell account-cell">
+          <span class="meta-label">Account</span>
+          <strong class="meta-value account-value" data-field="account"></strong>
+        </div>
+        <div class="meta-cell plan-cell">
+          <span class="meta-label">Plan</span>
+          <strong class="meta-value" data-field="plan"></strong>
+        </div>
+        <div class="meta-cell renew-cell">
+          <span class="meta-label">Renew at</span>
+          <strong class="meta-value" data-field="renew-at"></strong>
+          <span class="meta-relative" data-field="renew-relative"></span>
+        </div>
+      </section>
+
+      <section class="quota-list" data-list="windows"></section>
+
+      <section class="reset-section" data-section="resets" hidden>
+        <div class="reset-summary">
+          <span>主动重置</span>
+          <strong data-field="reset-count"></strong>
+          <small>GMT+8</small>
+        </div>
+        <div class="reset-rows" data-list="resets"></div>
+      </section>
+
+      <div class="account-error" data-field="error" hidden></div>
+    </article>
+  </template>
+
+  <template id="quota-template">
+    <div class="quota-item">
+      <div class="icon-bg">
+        <svg class="progress-ring" viewBox="0 0 120 120" aria-hidden="true">
+          <circle class="progress-ring-bg" cx="60" cy="60" r="54"></circle>
+          <circle class="progress-ring-fg" cx="60" cy="60" r="54"></circle>
+        </svg>
+        <svg class="status-icon" viewBox="0 0 1304 1024" aria-hidden="true"><use href="#paw-shape"></use></svg>
+      </div>
+      <div class="quota-info">
+        <div class="quota-primary">
+          <span class="quota-label" data-field="window-label"></span>
+          <strong class="quota-value" data-field="window-value"></strong>
+        </div>
+        <div class="quota-meta" data-field="window-meta"></div>
+      </div>
+    </div>
+  </template>
+
+  <template id="reset-template">
+    <div class="reset-row">
+      <span data-field="reset-index"></span>
+      <span data-field="reset-time"></span>
+    </div>
+  </template>
+
+  <script type="application/json" id="report-data">__PAYLOAD_JSON__</script>
+  <script>
+  (() => {
+    const data = JSON.parse(document.getElementById('report-data').textContent);
+    const report = document.getElementById('report');
+    const authFiles = document.getElementById('auth-files');
+    const authTemplate = document.getElementById('auth-file-template');
+    const quotaTemplate = document.getElementById('quota-template');
+    const resetTemplate = document.getElementById('reset-template');
+    const setText = (root, selector, value) => {
+      const node = root.querySelector(selector);
+      if (node) node.textContent = value ?? '';
+    };
+
+    document.getElementById('report-title').textContent = data.title;
+    document.getElementById('account-count').textContent = `${data.accounts.length} AUTH FILE${data.accounts.length === 1 ? '' : 'S'}`;
+    document.getElementById('queried-at').textContent = `Queried at: ${data.fetched_at} · GMT+8`;
+    if (data.background_uri) {
+      document.getElementById('top-banner').style.backgroundImage = `url("${data.background_uri}")`;
+      document.getElementById('top-banner').style.backgroundPosition = data.background_position || 'center top';
+    }
+
+    for (const item of data.accounts) {
+      const fragment = authTemplate.content.cloneNode(true);
+      const card = fragment.querySelector('.auth-card');
+      const icon = fragment.querySelector('[data-field="provider-icon"]');
+      icon.src = item.provider_icon;
+      icon.alt = item.provider_type;
+      if (item.provider_icon_theme) icon.closest('.provider-icon').classList.add(item.provider_icon_theme);
+      setText(fragment, '[data-field="provider-type"]', item.provider_type);
+      setText(fragment, '[data-field="provider-name"]', item.provider_name);
+      setText(fragment, '[data-field="account"]', item.account_display);
+      setText(fragment, '[data-field="plan"]', item.plan || '--');
+      setText(fragment, '[data-field="renew-at"]', item.renew_at || '--');
+      setText(fragment, '[data-field="renew-relative"]', item.renew_relative);
+
+      const quotaList = fragment.querySelector('[data-list="windows"]');
+      for (const windowData of item.windows) {
+        const row = quotaTemplate.content.cloneNode(true);
+        const quotaItem = row.querySelector('.quota-item');
+        quotaItem.classList.add(windowData.tone);
+        setText(row, '[data-field="window-label"]', windowData.label);
+        setText(row, '[data-field="window-value"]', windowData.value);
+        setText(row, '[data-field="window-meta"]', windowData.meta);
+        const progress = row.querySelector('.progress-ring-fg');
+        const percent = windowData.percent ?? 0;
+        progress.style.strokeDashoffset = String(339.29 * (1 - percent / 100));
+        if (windowData.percent === null) progress.classList.add('unknown');
+        quotaList.appendChild(row);
+      }
+      if (!item.windows.length) quotaList.hidden = true;
+
+      const resetSection = fragment.querySelector('[data-section="resets"]');
+      if (item.reset_count_text) {
+        resetSection.hidden = false;
+        setText(resetSection, '[data-field="reset-count"]', `${item.reset_count_text} 次`);
+        const resetList = resetSection.querySelector('[data-list="resets"]');
+        item.reset_credits.forEach((credit, index) => {
+          const row = resetTemplate.content.cloneNode(true);
+          setText(row, '[data-field="reset-index"]', `第 ${index + 1} 次`);
+          setText(row, '[data-field="reset-time"]', credit);
+          resetList.appendChild(row);
+        });
+      }
+
+      if (item.error) {
+        card.classList.add('has-error');
+        const error = fragment.querySelector('[data-field="error"]');
+        error.hidden = false;
+        error.textContent = item.error;
+      }
+      authFiles.appendChild(fragment);
+    }
+
+    document.getElementById('empty-state').hidden = data.accounts.length !== 0;
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      document.documentElement.dataset.ready = 'true';
+      document.documentElement.dataset.renderHeight = String(Math.ceil(report.getBoundingClientRect().height));
+    }));
+  })();
+  </script>
+</body>
+</html>

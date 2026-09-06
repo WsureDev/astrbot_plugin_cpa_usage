@@ -1,0 +1,536 @@
+@font-face {
+  font-family: "BaoTu XiaoBai";
+  src: url("__FONT_TITLE_URI__") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+@font-face {
+  font-family: "ADLaM Display";
+  src: url("__FONT_DISPLAY_URI__") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+@font-face {
+  font-family: "Spicy Rice";
+  src: url("__FONT_DATA_URI__") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+@font-face {
+  font-family: "DingTalk JinBuTi";
+  src: url("__FONT_FOOTER_URI__") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+@font-face {
+  font-family: "CPA Quota Sans";
+  src: url("__FONT_BODY_URI__");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: block;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: fit-content;
+  height: fit-content;
+  overflow: hidden;
+  background: transparent;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.card {
+  position: relative;
+  width: 500px;
+  overflow: hidden;
+  background-color: #f8f4f2;
+  color: #887870;
+  box-shadow: 0 15px 35px rgba(90, 80, 80, 0.12), 0 5px 15px rgba(0, 0, 0, 0.08);
+  font-family: "ADLaM Display", "CPA Quota Sans", sans-serif;
+}
+
+.header {
+  height: 280px;
+  overflow: hidden;
+  background-color: #fdecf2;
+  clip-path: ellipse(90% 82% at 32% 5%);
+}
+
+.top-banner {
+  width: 100%;
+  height: 400px;
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.main-content {
+  position: relative;
+  z-index: 2;
+  margin-top: -65px;
+  padding: 0 45px 30px;
+}
+
+.report-heading {
+  min-height: 122px;
+  padding-top: 40px;
+}
+
+.heading-line {
+  display: flex;
+  align-items: baseline;
+  gap: 20px;
+  min-width: 0;
+}
+
+.nickname {
+  position: relative;
+  top: 5px;
+  min-width: 0;
+  overflow: hidden;
+  color: rgb(84, 173, 255);
+  font-family: "BaoTu XiaoBai", "CPA Quota Sans", cursive;
+  font-size: 36px;
+  font-weight: normal;
+  letter-spacing: 0.5px;
+  line-height: 1.2;
+  text-overflow: ellipsis;
+  text-shadow: 0 0 1px rgba(0, 0, 0, 0.1);
+  white-space: nowrap;
+}
+
+.radio-button-wrapper {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  padding: 6px 15px 6px 10px;
+  border-radius: 99px;
+  background-color: rgb(84, 173, 255);
+  box-shadow: 0 2px 5px rgba(84, 173, 255, 0.3);
+}
+
+.radio-dot {
+  width: 15px;
+  height: 15px;
+  margin-right: 10px;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  background-color: rgb(84, 173, 255);
+}
+
+.bot-logo {
+  color: #fff;
+  font-family: "ADLaM Display", serif;
+  font-size: 14px;
+  font-weight: normal;
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+}
+
+.queried-at {
+  margin-top: 13px;
+  color: #a4948c;
+  font-family: "Spicy Rice", "CPA Quota Sans", serif;
+  font-size: 14px;
+  letter-spacing: 0.2px;
+  text-shadow: 0 0 2px rgba(0, 0, 0, 0.05);
+}
+
+.auth-files {
+  display: grid;
+  gap: 24px;
+}
+
+.auth-card {
+  position: relative;
+  z-index: 1;
+  padding: 22px 22px 24px;
+  overflow: hidden;
+  border-radius: 20px;
+  background: #f8f4f2;
+  box-shadow:
+    9px 9px 20px rgba(174, 155, 145, 0.22),
+    -8px -8px 18px rgba(255, 255, 255, 0.92);
+}
+
+.auth-heading {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+}
+
+.provider-icon {
+  width: 50px;
+  height: 50px;
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  margin-right: 15px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.5);
+  box-shadow:
+    inset 2px 2px 5px rgba(176, 158, 149, 0.14),
+    inset -3px -3px 6px rgba(255, 255, 255, 0.86);
+}
+
+.provider-icon img {
+  width: 29px;
+  height: 29px;
+  display: block;
+  object-fit: contain;
+}
+
+.provider-icon.kimi {
+  background: #1783ff;
+}
+
+.provider-copy {
+  min-width: 0;
+}
+
+.provider-type {
+  overflow: hidden;
+  color: rgb(84, 173, 255);
+  font-family: "Spicy Rice", "CPA Quota Sans", serif;
+  font-size: 21px;
+  letter-spacing: 0.5px;
+  line-height: 1.15;
+  text-overflow: ellipsis;
+  text-shadow: 0 0 2px rgba(0, 0, 0, 0.05);
+  white-space: nowrap;
+}
+
+.provider-detail {
+  margin-top: 5px;
+  overflow: hidden;
+  color: #a4948c;
+  font-family: "ADLaM Display", "CPA Quota Sans", serif;
+  font-size: 12px;
+  letter-spacing: 0.2px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.subscription-meta {
+  display: grid;
+  grid-template-columns: minmax(0, 1.48fr) minmax(50px, 0.55fr) minmax(84px, 0.9fr);
+  gap: 13px;
+  align-items: start;
+  margin-top: 24px;
+}
+
+.meta-cell {
+  min-width: 0;
+}
+
+.meta-label,
+.meta-value,
+.meta-relative {
+  display: block;
+}
+
+.meta-label {
+  margin-bottom: 6px;
+  color: #b3a49c;
+  font-family: "Spicy Rice", "CPA Quota Sans", serif;
+  font-size: 11px;
+  letter-spacing: 0.25px;
+}
+
+.meta-value {
+  overflow: hidden;
+  color: #776861;
+  font-family: "ADLaM Display", "CPA Quota Sans", sans-serif;
+  font-size: 13px;
+  font-weight: normal;
+  line-height: 1.3;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.account-value {
+  font-family: "CPA Quota Sans", ui-monospace, monospace;
+  font-weight: 700;
+}
+
+.meta-relative {
+  margin-top: 3px;
+  color: #ad9e96;
+  font-family: "CPA Quota Sans", sans-serif;
+  font-size: 10px;
+  white-space: nowrap;
+}
+
+.quota-list {
+  display: grid;
+  gap: 16px;
+  margin-top: 28px;
+}
+
+.quota-item {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  color: rgb(84, 173, 255);
+  font-family: "Spicy Rice", "CPA Quota Sans", serif;
+  text-shadow: 0 0 2px rgba(0, 0, 0, 0.05);
+}
+
+.quota-item.warn {
+  color: rgb(251, 170, 147);
+}
+
+.quota-item.bad {
+  color: rgb(255, 125, 153);
+}
+
+.quota-item.unknown {
+  color: rgb(184, 170, 159);
+}
+
+.icon-bg {
+  position: relative;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  margin-right: 17px;
+}
+
+.progress-ring {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.progress-ring-bg,
+.progress-ring-fg {
+  fill: none;
+  stroke-width: 8;
+}
+
+.progress-ring-bg {
+  stroke: #e9e2de;
+}
+
+.progress-ring-fg {
+  stroke: currentColor;
+  stroke-dasharray: 339.29;
+  stroke-dashoffset: 339.29;
+  stroke-linecap: round;
+}
+
+.progress-ring-fg.unknown {
+  stroke-dashoffset: 339.29 !important;
+}
+
+.status-icon {
+  position: relative;
+  z-index: 1;
+  width: 25px;
+  height: 25px;
+  fill: currentColor;
+  transform: rotate(-30deg);
+}
+
+.quota-info {
+  min-width: 0;
+  flex: 1;
+}
+
+.quota-primary {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.quota-label {
+  min-width: 0;
+  overflow: hidden;
+  font-size: 16px;
+  line-height: 1.2;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.quota-value {
+  flex: 0 0 auto;
+  font-size: 18px;
+  font-weight: normal;
+}
+
+.quota-meta {
+  margin-top: 4px;
+  overflow: hidden;
+  color: #a99a92;
+  font-family: "CPA Quota Sans", sans-serif;
+  font-size: 11px;
+  line-height: 1.35;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.reset-section {
+  margin-top: 28px;
+  color: #887870;
+  font-family: "CPA Quota Sans", sans-serif;
+  font-size: 12px;
+}
+
+.reset-summary {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.reset-summary > span {
+  font-weight: 700;
+}
+
+.reset-summary > strong {
+  color: rgb(84, 173, 255);
+  font-family: "Spicy Rice", "CPA Quota Sans", serif;
+  font-size: 14px;
+  font-weight: normal;
+}
+
+.reset-summary > small {
+  margin-left: auto;
+  color: #b3a49c;
+  font-size: 9px;
+}
+
+.reset-rows {
+  display: grid;
+  gap: 8px;
+  margin-top: 11px;
+}
+
+.reset-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  color: #9b8b83;
+  line-height: 1.35;
+}
+
+.reset-row span:last-child {
+  color: #ad9e96;
+  text-align: right;
+}
+
+.account-error {
+  margin-top: 22px;
+  color: #d77c85;
+  font-family: "CPA Quota Sans", sans-serif;
+  font-size: 11px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.empty-state {
+  padding: 38px 22px;
+  border-radius: 20px;
+  background: #f8f4f2;
+  box-shadow:
+    9px 9px 20px rgba(174, 155, 145, 0.22),
+    -8px -8px 18px rgba(255, 255, 255, 0.92);
+  color: #a4948c;
+  font-family: "Spicy Rice", "CPA Quota Sans", serif;
+  font-size: 14px;
+  text-align: center;
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 40px;
+  color: rgb(184, 170, 159);
+  font-size: 15px;
+  text-shadow: 0 0 1px rgba(0, 0, 0, 0.1);
+}
+
+.footer-title {
+  margin-left: 15px;
+  font-family: "ADLaM Display", serif;
+}
+
+.footer-uptime {
+  margin-right: 5px;
+  font-family: "DingTalk JinBuTi", "CPA Quota Sans", serif;
+  font-size: 12px;
+}
+
+.svg-definitions {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+.bg-tiny-paw,
+.bg-small-paw,
+.bg-medium-paw,
+.bg-big-paw {
+  position: absolute;
+  z-index: 0;
+  opacity: 0.15;
+  fill: #a0a0a0;
+  pointer-events: none;
+}
+
+.bg-tiny-paw {
+  right: 120px;
+  bottom: 310px;
+  width: 30px;
+  height: 30px;
+}
+
+.bg-small-paw {
+  left: 50px;
+  bottom: 0;
+  width: 60px;
+  height: 60px;
+  transform: scaleX(-1);
+}
+
+.bg-medium-paw {
+  right: 50px;
+  bottom: 310px;
+  width: 70px;
+  height: 70px;
+  transform: rotate(30deg) scaleX(-1);
+}
+
+.bg-big-paw {
+  right: 40px;
+  bottom: 20px;
+  width: 90px;
+  height: 90px;
+  transform: rotate(30deg) scaleX(-1);
+}
+
+[hidden] {
+  display: none !important;
+}

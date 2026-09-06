@@ -1,0 +1,7 @@
+name: astrbot_plugin_cpa_usage
+display_name: CPA Usage
+desc: 匹配当前 AstrBot Provider，只读查询 CPA 配额并发送容量卡片。
+author: WsureDev
+version: 0.3.0
+repo: https://github.com/WsureDev/astrbot_plugin_cpa_usage
+astrbot_version: ">=4.13"

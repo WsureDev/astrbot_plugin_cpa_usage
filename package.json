@@ -1,0 +1,8 @@
+{
+  "name": "astrbot-plugin-cpa-usage-manual-render",
+  "private": true,
+  "type": "module",
+  "devDependencies": {
+    "playwright-core": "^1.55.0"
+  }
+}

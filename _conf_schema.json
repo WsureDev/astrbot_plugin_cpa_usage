@@ -1,0 +1,65 @@
+{
+  "cpa_providers": {
+    "type": "template_list",
+    "description": "CPA Provider列表",
+    "hint": "仅当当前 AstrBot Provider ID 与 provider_id 精确匹配时才会查询；每次触发只读查询，不消费 usage queue。",
+    "templates": {
+      "provider": {
+        "name": "CPA Provider",
+        "display_item": "provider_id",
+        "items": {
+          "provider_id": {
+            "description": "绑定 AstrBot Provider",
+            "hint": "请选择该 Provider Source 下任意一个聊天模型；插件会自动绑定同一 Source 下的全部模型。",
+            "type": "string",
+            "default": "",
+            "_special": "select_provider"
+          },
+          "base_url": {"description": "CPA URL", "hint": "例如 http://127.0.0.1:8317", "type": "string", "default": "http://127.0.0.1:8317"},
+          "token": {"description": "CPA Management Token", "type": "string", "password": true, "default": ""},
+          "provider_type": {"description": "限定 Provider 类型（可选）", "hint": "例如 codex、claude、gemini-cli、antigravity、kimi、xai；留空显示该 CPA 中所有账号。", "type": "string", "default": ""},
+          "management_prefix": {"description": "Management API 路径", "type": "string", "default": "/v0/management"},
+          "include_disabled": {"description": "包含已禁用账号", "type": "bool", "default": false},
+          "title": {"description": "此 Provider 的卡片标题（可选）", "type": "string", "default": ""},
+          "enabled": {"description": "启用此映射", "type": "bool", "default": true}
+        }
+      }
+    },
+    "default": []
+  },
+  "timeout": {"description": "CPA 请求超时（秒）", "type": "int", "default": 20},
+  "tls_verify": {"description": "验证 CPA HTTPS 证书", "type": "bool", "default": true},
+  "title": {"description": "容量卡片标题", "type": "string", "default": "CPA Usages"},
+  "background_images": {
+    "description": "自定义卡片背景",
+    "hint": "可上传多张；未配置或文件不可用时随机使用插件内置背景。",
+    "type": "file",
+    "file_types": ["png", "jpg", "jpeg", "webp", "svg"],
+    "default": []
+  },
+  "background_strategy": {
+    "description": "背景切换方式",
+    "type": "string",
+    "options": ["random", "daily", "fixed"],
+    "default": "random"
+  },
+  "background_overlay": {
+    "description": "背景暗色遮罩强度",
+    "hint": "0 为无遮罩，1 为完全遮盖。",
+    "type": "float",
+    "default": 0.66
+  },
+  "background_position": {
+    "description": "背景对齐位置",
+    "hint": "例如 center、center top、right center。",
+    "type": "string",
+    "default": "center"
+  },
+  "font_file": {
+    "description": "自定义卡片字体（可选）",
+    "hint": "默认使用插件内置中文字体。",
+    "type": "file",
+    "file_types": ["woff2", "woff", "ttf", "otf", "ttc"],
+    "default": []
+  }
+}
