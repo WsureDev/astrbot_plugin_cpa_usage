@@ -157,6 +157,6 @@ class CPAUsagePlugin(Star):
             background_position=str(
                 provider.get("background_position")
                 or self.config.get("background_position")
-                or "center"
+                or "center top"
             ),
         )

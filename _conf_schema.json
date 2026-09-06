@@ -51,9 +51,9 @@
   },
   "background_position": {
     "description": "背景对齐位置",
-    "hint": "例如 center、center top、right center。",
+    "hint": "默认顶部居中；如需垂直居中请填写 center center。",
     "type": "string",
-    "default": "center"
+    "default": "center top"
   },
   "font_file": {
     "description": "自定义卡片字体（可选）",

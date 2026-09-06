@@ -40,6 +40,16 @@ class RenderTests(unittest.TestCase):
         self.assertEqual(mask_account("user@example.com"), "use*********.com")
         self.assertNotIn("user@exam", mask_account("user@example.com"))
 
+    def test_legacy_center_banner_position_is_top_aligned(self):
+        self.assertEqual(
+            QuotaCardRenderer(background_position="center").background_position,
+            "center top",
+        )
+        self.assertEqual(
+            QuotaCardRenderer(background_position="center center").background_position,
+            "center center",
+        )
+
     def test_html_uses_external_template_css_and_inlined_assets(self):
         rendered = QuotaCardRenderer(background_strategy="fixed").render(self.snapshot(), title="CPA Usages")
         self.assertIn("<!DOCTYPE html>", rendered)

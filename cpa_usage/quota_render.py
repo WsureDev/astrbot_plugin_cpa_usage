@@ -110,7 +110,7 @@ class QuotaCardRenderer:
         background_images: list[str] | tuple[str, ...] | None = None,
         background_strategy: str = "random",
         background_overlay: float = 0.66,
-        background_position: str = "center",
+        background_position: str = "center top",
         chromium_path: str | Path | None = None,
         node_path: str | Path | None = None,
     ) -> None:
@@ -356,7 +356,14 @@ class QuotaCardRenderer:
 
     @staticmethod
     def _safe_background_position(value: str) -> str:
-        normalized = str(value or "center").strip().lower()
+        normalized = str(value or "center top").strip().lower()
+        # ``center`` was the old default. With ``background-size: contain`` it
+        # vertically centered short banners and exposed the header color above
+        # the image. Keep existing saved configs working by interpreting it as
+        # the status template's original top alignment. Users can still choose
+        # explicit vertical centering with ``center center``.
+        if normalized == "center":
+            return "center top"
         allowed = {
             "center",
             "top",
@@ -373,7 +380,7 @@ class QuotaCardRenderer:
             "right center",
             "right bottom",
         }
-        return normalized if normalized in allowed else "center"
+        return normalized if normalized in allowed else "center top"
 
 
 __all__ = ["AssetError", "QuotaCardRenderer", "RENDER_OPTIONS", "find_chromium", "find_node"]

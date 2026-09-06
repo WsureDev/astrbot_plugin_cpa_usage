@@ -88,7 +88,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--background-image", action="append", default=[], help="custom background; repeat for multiple files")
     parser.add_argument("--background-strategy", choices=("random", "daily", "fixed"), default="", help="background selection strategy")
     parser.add_argument("--background-overlay", type=float, default=None, help="hero dark overlay, 0.0 to 1.0")
-    parser.add_argument("--background-position", default="", help="CSS background position, e.g. center top")
+    parser.add_argument("--background-position", default="", help="CSS background position (default: center top)")
     parser.add_argument("--chromium-path", default="", help="Chromium executable; defaults to CPA_CHROMIUM_PATH/autodetection")
     parser.add_argument("--node-path", default="", help="Node.js executable; defaults to CPA_NODE_PATH/autodetection")
     parser.add_argument("--title", default="CPA Usages", help="card title")
@@ -135,7 +135,7 @@ def run(args: argparse.Namespace) -> int:
         background_images=background_images,
         background_strategy=getattr(args, "background_strategy", "") or _env_value(values, "CPA_BACKGROUND_STRATEGY", "random"),
         background_overlay=overlay,
-        background_position=getattr(args, "background_position", "") or _env_value(values, "CPA_BACKGROUND_POSITION", "center"),
+        background_position=getattr(args, "background_position", "") or _env_value(values, "CPA_BACKGROUND_POSITION", "center top"),
         chromium_path=getattr(args, "chromium_path", "") or _env_value(values, "CPA_CHROMIUM_PATH") or None,
         node_path=getattr(args, "node_path", "") or _env_value(values, "CPA_NODE_PATH") or None,
     )
